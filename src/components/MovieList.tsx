@@ -16,7 +16,7 @@ const MovieList: FC = () => {
         <div className="flex flex-wrap justify-center gap-[20px]">
           {movies.length > 0
             ? movies.map((movie: SimpleMovie) => <MovieItem key={movie.imdbID} movie={movie} />)
-            : !loading && <div className="text-center">No movies found.</div>}
+            : !loading && <div className="text-center">영화를 찾지 못했습니다.</div>}
         </div>
       )}
     </div>

@@ -11,7 +11,7 @@ const fetchMoviesFromAPI = async (query: string, page: number) => {
     body: JSON.stringify({ title: query, page }),
   });
   if (!response.ok) {
-    throw new Error('Network response was not ok');
+    throw new Error('네트워크 상태 점검이 필요합니다.');
   }
 
   return response.json();
@@ -29,7 +29,7 @@ export const searchMovies = createAsyncThunk(
         return thunkAPI.rejectWithValue(data.Error);
       }
     } catch (error) {
-      return thunkAPI.rejectWithValue('Failed to fetch movies');
+      return thunkAPI.rejectWithValue('서버에 데이터 요청이 실패했습니다.');
     }
   }
 );
@@ -42,7 +42,7 @@ const fetchMovieDetailsFromAPI = async (id: string) => {
   });
 
   if (!response.ok) {
-    throw new Error('Network response was not ok');
+    throw new Error('네트워크 상태 점검이 필요합니다.');
   }
 
   const data = await response.json();
@@ -61,7 +61,7 @@ export const getMovieDetails = createAsyncThunk(
         return thunkAPI.rejectWithValue(data.Error);
       }
     } catch (error) {
-      return thunkAPI.rejectWithValue('Failed to fetch movie details');
+      return thunkAPI.rejectWithValue('서버에 데이터 요청이 실패했습니다.');
     }
   }
 );

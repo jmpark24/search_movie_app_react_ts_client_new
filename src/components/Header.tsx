@@ -14,7 +14,7 @@ const Header: FC = () => {
   const location = useLocation();
   const [menus] = useState<Menu[]>([
     { name: 'Search', href: '/' },
-    { name: 'Movie', href: '/movie/:id' }, // 기본 경로 설정
+    { name: 'Movie', href: '/movie/:id' },
     { name: 'About', href: '/about' },
   ]);
 
@@ -23,7 +23,6 @@ const Header: FC = () => {
   const lastMovieId = useSelector((state: RootState) => state.movieDetails.movieDetails?.imdbID);
 
   useEffect(() => {
-    // location이 변경될 때마다 activeMenu 업데이트
     setActiveMenu(location.pathname);
   }, [location.pathname]);
 
@@ -31,11 +30,9 @@ const Header: FC = () => {
     let targetHref = href;
 
     if (href === '/movie/:id') {
-      // 마지막으로 클릭한 영화 ID가 존재하면 해당 ID로 이동
       if (lastMovieId) {
         targetHref = `/movie/${lastMovieId}`;
       } else {
-        // 마지막 영화 ID가 없으면 기본 경로로 이동
         targetHref = href;
       }
     }
