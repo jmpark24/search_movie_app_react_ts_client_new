@@ -11,15 +11,13 @@ import Skeleton from '../components/Skeleton';
 const Movie: FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
-  const params = useParams();
-  // const movie = useSelector((state: RootState) => state.movie.movie);
   const movieDetail = useSelector((state: RootState) => state.movieDetails.movieDetails);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
-      if (!id || id === ':id' || (movieDetail && movieDetail.imdbID === params.id)) {
+      if (!id || id === ':id' || (movieDetail && movieDetail.imdbID === id)) {
         setLoading(false);
         return;
       } else {
@@ -31,8 +29,8 @@ const Movie: FC = () => {
 
           dispatch(setMovieDetails(data));
         } catch (e) {
-          setError(`Failed to fetch movie details: ${e}`);
-          alert(error);
+          setError(`영화 세부 정보를 가져오는 데 실패했습니다: ${e}`);
+          alert(`영화 세부 정보를 가져오는 데 실패했습니다: ${e}`);
         } finally {
           setLoading(false);
         }
@@ -40,12 +38,12 @@ const Movie: FC = () => {
     };
 
     fetchMovieDetails();
-  }, [id, dispatch, error, movieDetail, params.id]);
+  }, [id, dispatch, movieDetail]);
 
   if (!id || id === ':id') {
     return (
-      <div className="max-w-container mx-auto my-0 px-5 py-10 sm:px-10 sm:py-10 lg:px-0 lg:py-10 text-color-white-50">
-        <h1 className="text-4xl mb-4">영화를 선택해 주세요</h1>
+      <div className="max-w-container mx-auto px-5 py-10 text-white">
+        <h1 className="text-2xl sm:text-4xl mb-4">영화를 선택해 주세요</h1>
         <p>특정 영화를 보려면 목록에서 선택하거나 검색을 통해 영화를 찾아보세요.</p>
       </div>
     );
@@ -59,55 +57,53 @@ const Movie: FC = () => {
     return <NotFound />;
   }
 
-  // movie 상태에 있는 데이터로 렌더링
   const bigPoster = movieDetail?.Poster.replace('SX300', 'SX700');
 
   return (
-    <div className="max-w-container mx-auto my-0 px-5 py-10 sm:px-10 sm:py-10 lg:px-0 lg:py-10">
-      <div className="flex gap-16 lg:gap-8 p-5">
-        <div
-          className="flex-shrink-0 bg-cover bg-center rounded-lg bg-color-area"
-          style={{
-            backgroundImage: `url(${bigPoster})`,
-            width: '500px',
-            height: 'calc(500px * 3 / 2)',
-          }}
-        />
+    <div className="max-w-container mx-auto px-5 py-10">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+        <div className="relative w-[500px] h-[calc(500px*3/2)] overflow-hidden bg-gray-800 rounded-lg">
+          <img
+            src={bigPoster}
+            alt={movieDetail?.Title}
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
         <div className="flex-grow">
-          <div className="text-color-white text-5xl font-oswald leading-tight mb-8">
+          <div className="text-white text-3xl sm:text-4xl lg:text-5xl font-semibold mb-6">
             {movieDetail?.Title}
           </div>
-          <div className="text-color-primary mb-5">
+          <div className="text-yellow-400 mb-4">
             <span>{movieDetail?.Released}</span>
             &nbsp;/&nbsp;
             <span>{movieDetail?.Runtime}</span>
             &nbsp;/&nbsp;
             <span>{movieDetail?.Country}</span>
           </div>
-          <div className="text-color-white-50 mb-5">{movieDetail?.Plot}</div>
+          <div className="text-white mb-4">{movieDetail?.Plot}</div>
           <div>
-            <h3 className="text-color-white text-xl font-oswald my-6">Ratings</h3>
+            <h3 className="text-white text-xl font-semibold mb-4">Ratings</h3>
             {movieDetail?.Ratings.map((rating) => (
-              <p key={rating.Source} className="text-color-white-50">
+              <p key={rating.Source} className="text-white">
                 {rating.Source} - {rating.Value}
               </p>
             ))}
           </div>
           <div>
-            <h3 className="text-color-white text-xl font-oswald my-6">Actors</h3>
-            <p className="text-color-white-50">{movieDetail?.Actors}</p>
+            <h3 className="text-white text-xl font-semibold mt-6">Actors</h3>
+            <p className="text-white">{movieDetail?.Actors}</p>
           </div>
           <div>
-            <h3 className="text-color-white text-xl font-oswald my-6">Director</h3>
-            <p className="text-color-white-50">{movieDetail?.Director}</p>
+            <h3 className="text-white text-xl font-semibold mt-6">Director</h3>
+            <p className="text-white">{movieDetail?.Director}</p>
           </div>
           <div>
-            <h3 className="text-color-white text-xl font-oswald my-6">Production</h3>
-            <p className="text-color-white-50">{movieDetail?.Production}</p>
+            <h3 className="text-white text-xl font-semibold mt-6">Production</h3>
+            <p className="text-white">{movieDetail?.Production}</p>
           </div>
           <div>
-            <h3 className="text-color-white text-xl font-oswald my-6">Genre</h3>
-            <p className="text-color-white-50">{movieDetail?.Genre}</p>
+            <h3 className="text-white text-xl font-semibold mt-6">Genre</h3>
+            <p className="text-white">{movieDetail?.Genre}</p>
           </div>
         </div>
       </div>
