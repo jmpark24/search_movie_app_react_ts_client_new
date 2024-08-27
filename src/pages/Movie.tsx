@@ -62,7 +62,7 @@ const Movie: FC = () => {
   return (
     <div className="max-w-container mx-auto px-5 py-10">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
-        <div className="relative w-[500px] h-[calc(500px*3/2)] overflow-hidden bg-gray-800 rounded-lg">
+        <div className="relative overflow-hidden bg-gray-800 rounded-lg">
           <img
             src={bigPoster}
             alt={movieDetail?.Title}
@@ -82,7 +82,7 @@ const Movie: FC = () => {
           </div>
           <div className="text-white mb-4">{movieDetail?.Plot}</div>
           <div>
-            <h3 className="text-white text-xl font-semibold mb-4">Ratings</h3>
+            <h3 className="text-white text-xl font-semibold mb-4">평점</h3>
             {movieDetail?.Ratings.map((rating) => (
               <p key={rating.Source} className="text-white">
                 {rating.Source} - {rating.Value}
@@ -90,19 +90,19 @@ const Movie: FC = () => {
             ))}
           </div>
           <div>
-            <h3 className="text-white text-xl font-semibold mt-6">Actors</h3>
+            <h3 className="text-white text-xl font-semibold mt-6">출연 배우</h3>
             <p className="text-white">{movieDetail?.Actors}</p>
           </div>
           <div>
-            <h3 className="text-white text-xl font-semibold mt-6">Director</h3>
+            <h3 className="text-white text-xl font-semibold mt-6">감독</h3>
             <p className="text-white">{movieDetail?.Director}</p>
           </div>
           <div>
-            <h3 className="text-white text-xl font-semibold mt-6">Production</h3>
+            <h3 className="text-white text-xl font-semibold mt-6">제작사</h3>
             <p className="text-white">{movieDetail?.Production}</p>
           </div>
           <div>
-            <h3 className="text-white text-xl font-semibold mt-6">Genre</h3>
+            <h3 className="text-white text-xl font-semibold mt-6">장르</h3>
             <p className="text-white">{movieDetail?.Genre}</p>
           </div>
         </div>
