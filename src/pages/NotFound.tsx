@@ -15,7 +15,7 @@ const NotFound: FC = () => {
     lg:py-10 
   "
     >
-      <h1 className="text-7xl font-bold text-color-white-10 text-center">
+      <h1 className="text-2xl sm:text-7xl font-bold text-color-white-10 text-center">
         죄송합니다.
         <br />
         페이지를 찾을 수 없습니다.

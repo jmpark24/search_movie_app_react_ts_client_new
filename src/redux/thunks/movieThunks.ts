@@ -53,6 +53,12 @@ const fetchMovieDetailsFromAPI = async (id: string) => {
 export const getMovieDetails = createAsyncThunk(
   'movies/getMovieDetails',
   async (id: string, thunkAPI) => {
+    // ID 형식 검증
+    const idPattern = /^tt\d{7}$/;
+    if (!idPattern.test(id)) {
+      return thunkAPI.rejectWithValue('유효하지 않은 ID 형식입니다.');
+    }
+
     try {
       const data = await fetchMovieDetailsFromAPI(id);
       if (data.Response === 'True') {

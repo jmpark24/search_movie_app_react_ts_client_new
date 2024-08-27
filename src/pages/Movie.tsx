@@ -30,7 +30,6 @@ const Movie: FC = () => {
           dispatch(setMovieDetails(data));
         } catch (e) {
           setError(`영화 세부 정보를 가져오는 데 실패했습니다: ${e}`);
-          alert(`영화 세부 정보를 가져오는 데 실패했습니다: ${e}`);
         } finally {
           setLoading(false);
         }
@@ -60,7 +59,7 @@ const Movie: FC = () => {
   const bigPoster = movieDetail?.Poster.replace('SX300', 'SX700');
 
   return (
-    <div className="max-w-container mx-auto px-5 py-10">
+    <div className="max-w-container mx-auto my-0 px-5 py-10 sm:px-10 sm:py-10 lg:px-0 lg:py-10">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
         <div className="relative overflow-hidden bg-gray-800 rounded-lg">
           <img
