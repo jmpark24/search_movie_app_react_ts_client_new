@@ -1,7 +1,7 @@
 // src/redux/thunks/movieThunks.ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const URL: string = 'http://192.168.219.197:8080';
+const URL: string | undefined = process.env.REACT_APP_URL;
 
 // API 요청 함수
 const fetchMoviesFromAPI = async (query: string, page: number) => {
