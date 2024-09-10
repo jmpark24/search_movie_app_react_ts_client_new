@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { MovieDetails, SearchMovies } from '../types/omdb';
 
-const URL: string | undefined = 'https://3.37.129.110' || process.env.REACT_APP_URL;
+const URL: string | undefined = process.env.REACT_APP_URL;
 
 export const searchMovies = createAsyncThunk(
   'movies/searchMovies',
