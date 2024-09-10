@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SimpleMovie } from '../redux/types';
+import { SimpleMovie } from '../redux/types/omdb';
 
 interface Props {
   movie: SimpleMovie;

@@ -1,25 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { searchMovies, getMovieDetails } from '../thunks/movieThunks';
-import { MovieState } from '../types';
+import { searchMovies } from '../thunks/movieThunks';
+import { MovieState } from '../types/omdb';
 
 const initialState: MovieState = {
   searchText: '',
   page: 1,
-  pageMax: 1,
+  pageMax: 0,
   movies: [],
-  movie: null,
   loading: false,
   message: '영문으로 영화 제목을 검색해보세요!',
 };
 
-const movieSlice = createSlice({
-  name: 'movie',
+const moviesSlice = createSlice({
+  name: 'searchMovies',
   initialState,
   reducers: {
     setSearchText(state, action: PayloadAction<string>) {
       state.searchText = action.payload;
-      state.page = 1; // 페이지를 초기화
-      state.movies = []; // 기존 영화 목록을 초기화
+      state.page = 1;
+      state.movies = [];
     },
     incrementPage(state) {
       state.page += 1;
@@ -32,19 +31,18 @@ const movieSlice = createSlice({
       })
       .addCase(searchMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.movies = [...state.movies, ...(action.payload.Search || [])];
-        state.pageMax = Math.ceil(+action.payload.totalResults / 10); // 페이지 수 계산
         state.message = '';
+        if (action.payload && action.payload.Search && action.payload.totalResults) {
+          state.movies = [...state.movies, ...action.payload.Search];
+          state.pageMax = Math.ceil(action.payload.totalResults / 10);
+        }
       })
-      .addCase(searchMovies.rejected, (state, action) => {
+      .addCase(searchMovies.rejected, (state) => {
         state.loading = false;
-        state.message = action.payload as string;
-      })
-      .addCase(getMovieDetails.fulfilled, (state, action) => {
-        state.movie = action.payload; // 영화 상세 정보 업데이트
+        state.message = '검색 된 영화가 없습니다!';
       });
   },
 });
 
-export const { setSearchText, incrementPage } = movieSlice.actions;
-export default movieSlice.reducer;
+export const { setSearchText, incrementPage } = moviesSlice.actions;
+export default moviesSlice.reducer;

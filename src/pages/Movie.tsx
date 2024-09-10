@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../redux/store';
+import { AppDispatch, RootState } from '../redux/store/movies';
 import { getMovieDetails } from '../redux/thunks/movieThunks';
 import { setMovieDetails } from '../redux/slices/movieDetailSlice';
 import NotFound from './NotFound';
@@ -11,28 +11,35 @@ import Skeleton from '../components/Skeleton';
 const Movie: FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
-  const movieDetail = useSelector((state: RootState) => state.movieDetails.movieDetails);
+  const movieDetail = useSelector((state: RootState) => state.MovieDetails.movieDetails);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
-      if (!id || id === ':id' || (movieDetail && movieDetail.imdbID === id)) {
+      if (!id || id === ':id') {
         setLoading(false);
         return;
-      } else {
-        setLoading(true);
-        setError(null);
-        try {
-          const actionResult = await dispatch(getMovieDetails(id));
-          const data = unwrapResult(actionResult);
+      }
 
-          dispatch(setMovieDetails(data));
-        } catch (e) {
-          setError(`영화 세부 정보를 가져오는 데 실패했습니다: ${e}`);
-        } finally {
+      setLoading(true);
+      setError(null);
+
+      try {
+        if (movieDetail && movieDetail.imdbID === id) {
           setLoading(false);
+          return;
         }
+
+        const actionResult = await dispatch(getMovieDetails(id));
+        const data = unwrapResult(actionResult);
+        if (data) {
+          dispatch(setMovieDetails(data));
+        }
+      } catch (e) {
+        setError(`영화 세부 정보를 가져오는 데 실패했습니다: ${e}`);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -61,12 +68,8 @@ const Movie: FC = () => {
   return (
     <div className="max-w-container mx-auto my-0 px-5 py-10 sm:px-10 sm:py-10 lg:px-0 lg:py-10">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
-        <div className="relative overflow-hidden bg-gray-800 rounded-lg">
-          <img
-            src={bigPoster}
-            alt={movieDetail?.Title}
-            className="w-full h-full object-cover object-center"
-          />
+        <div className="relative  bg-gray-800 rounded-lg aspect-[53/75]">
+          <img src={bigPoster} alt={movieDetail?.Title} className="w-full h-full object-cover" />
         </div>
         <div className="flex-grow">
           <div className="text-white text-3xl sm:text-4xl lg:text-5xl font-semibold mb-6">

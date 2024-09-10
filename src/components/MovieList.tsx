@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { SimpleMovie } from '../redux/types';
+import { RootState } from '../redux/store/movies';
+import { SimpleMovie } from '../redux/types/omdb';
 import MovieItem from './MovieItem';
 
 const MovieList: FC = () => {
-  const { movies, loading, message } = useSelector((state: RootState) => state.movie);
+  const { movies, loading, message } = useSelector((state: RootState) => state.Movies);
 
   return (
     <div className="p-[20px] rounded-[4px] bg-color-area">

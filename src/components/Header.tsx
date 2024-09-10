@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { RootState } from '../redux/store';
+import { RootState } from '../redux/store/movies';
 import Logo from '../assets/images/logo.png';
 
 interface Menu {
@@ -20,7 +20,7 @@ const Header: FC = () => {
 
   const [activeMenu, setActiveMenu] = useState<string>(location.pathname);
 
-  const lastMovieId = useSelector((state: RootState) => state.movieDetails.movieDetails?.imdbID);
+  const lastMovieId = useSelector((state: RootState) => state.MovieDetails.movieDetails?.imdbID);
 
   useEffect(() => {
     setActiveMenu(location.pathname);

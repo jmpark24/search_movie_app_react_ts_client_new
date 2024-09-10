@@ -6,7 +6,7 @@ import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store from './redux/store/movies';
 
 const OutletComponent = () => {
   return (

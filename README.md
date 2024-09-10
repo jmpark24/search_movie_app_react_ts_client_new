@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# Search Movie App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## client 프로젝트
 
-## Available Scripts
+- 이 프로젝트는 OMDb API를 이용하여 영화 데이터를 node express로 만든 서버에 요청하여 전달받은 데이터를 렌더링하는 코드를 작성해놓았습니다.
 
-In the project directory, you can run:
+- 아래 링크를 클릭하면 배포 된 코드를 통해 웹앱을 이용해 볼 수 있습니다.
+- URL
 
-### `npm start`
+- 또한, 아래 서버 코드가 있는 저장소로 이동하여 서버 코드를 직접 실행하여 웹앱을 사용해보실 수 있습니다.
+- https://github.com/jmpark24/search_movie_app_node_express_server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 클라이언트 코드 직접 실행 방법
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. 원격 저장소 복사하기
 
-### `npm test`
+```
+git remote add https://github.com/jmpark24/search_movie_app_react_ts_client
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+위 명령어를 통하여 원격 저장소를 복사합니다.
 
-### `npm run build`
+2. 필요 라이브러리 설치
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   - `npm install` 명령어를 통해 `package.json`에 있는 라이브러리들을 설치합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. 서버 코드의 저장소로 이동하여 서버 코드를 실행합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. `npm run start` 명령어를 통해 웹 서버를 실행합니다.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. 영화 검색 웹앱을 이용해봅니다.
