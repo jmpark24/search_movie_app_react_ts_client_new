@@ -2,13 +2,19 @@
 
 ## client 프로젝트
 
+- 아래 링크를 클릭하면 배포 된 코드를 통해 웹앱을 이용해 볼 수 있습니다.
+- https://search-movie-app-react-ts-client-new.vercel.app/
+
 - 이 프로젝트는 OMDb API를 이용하여 영화 데이터를 node express로 만든 서버에 요청하여 전달받은 데이터를 렌더링하는 코드를 작성해놓았습니다.
 
-- 아래 링크를 클릭하면 배포 된 코드를 통해 웹앱을 이용해 볼 수 있습니다.
-- URL
+- 기존 클론코딩 프로젝트(javascript, typescript, web component, class로 구현되어 있는 서비스)를 리펙토링한 프로젝트(react, react-router-dom, redux) 입니다
+
+- 기존 프로젝트의 저장소 구경하기 : https://github.com/jmpark24/vanillajs-movie-app
 
 - 또한, 아래 서버 코드가 있는 저장소로 이동하여 서버 코드를 직접 실행하여 웹앱을 사용해보실 수 있습니다.
-- https://github.com/jmpark24/search_movie_app_node_express_server
+- 서버 코드의 저장소 구경하기 : https://github.com/jmpark24/search_movie_app_node_express_server
+
+- 이 프로젝트는 vercel로 배포되었습니다.
 
 ## 클라이언트 코드 직접 실행 방법
 
